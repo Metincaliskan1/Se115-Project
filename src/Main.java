@@ -91,8 +91,26 @@ public class Main {
         return sum;
     }
 
-    public static int bestDayOfMonth(int month) { 
-        return 1234; 
+    public static int bestDayOfMonth(int month) {
+        if(month>11||month<0){
+            return -1;
+        }
+
+        int bestdaytotal=-999999999;
+        int bestday=0;
+        for (int d=0;d<28;d++){
+            int sum=0;
+            for (int c=0;c<COMMS;c++){
+                sum=sum+profitData[month][d][c];
+            }
+            if(sum>bestdaytotal){
+                bestdaytotal=sum;
+                bestday=d+1;
+
+            }
+        }
+
+        return bestday;
     }
     
     public static String bestMonthForCommodity(String comm) { 
