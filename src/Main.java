@@ -1,6 +1,7 @@
 // Main.java — Students version
+
 import java.io.*;
-import java.util.*;
+import java.util.Scanner;
 
 public class Main {
     static final int MONTHS = 12;
@@ -9,16 +10,45 @@ public class Main {
     static String[] commodities = {"Gold", "Oil", "Silver", "Wheat", "Copper"};
     static String[] months = {"January","February","March","April","May","June",
                               "July","August","September","October","November","December"};
+
+    public static int[][][] profitData = new int[12][28][5];
+                                            //[month][day][comm]
     
 
     // ======== REQUIRED METHOD LOAD DATA (Students fill this) ========
     public static void loadData() {
+        //temporary data
+        profitData[0][0][0] = 100;
+        profitData[0][0][1] = 200;
+        profitData[0][1][0] = 500;
+
+        System.out.println("Dummy data loaded for testing.");
     }
 
     // ======== 10 REQUIRED METHODS (Students fill these) ========
 
     public static String mostProfitableCommodityInMonth(int month) {
-        return "DUMMY"; 
+        int maxProfit=-999999999;
+        int bestCommodityIndex=-1;
+        if(month>11||month<0){
+            return "INVALID_MONTH";
+        }
+        else {
+            for(int c=0;c<COMMS;c++){
+                int sum = 0;
+                for (int d=0;d<DAYS;d++){
+                    sum=sum+profitData[month][d][c];
+
+                }
+                if(sum>maxProfit){
+                    maxProfit=sum;
+                    bestCommodityIndex=c;
+                }
+
+
+            }
+        }
+        return commodities[bestCommodityIndex]+" "+maxProfit;
     }
 
     public static int totalProfitOnDay(int month, int day) {
