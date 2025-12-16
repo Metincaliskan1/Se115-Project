@@ -52,7 +52,16 @@ public class Main {
     }
 
     public static int totalProfitOnDay(int month, int day) {
-        return 1234;
+        int sum=0;
+        if(month>11||month<0||day>28||day<1){
+            return -99999;
+        }
+
+        for (int c=0;c<COMMS;c++){
+            sum=sum+profitData[month][day -1][c];
+        }
+
+        return sum;
     }
 
     public static int commodityProfitInRange(String commodity, int from, int to) {
