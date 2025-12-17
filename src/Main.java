@@ -149,7 +149,7 @@ public class Main {
             }
         }
         if(commIndex==-1){
-            return -9999999;
+            return -1;
         }
         int currentStreak=0;
         int maxStreak=0;
@@ -171,8 +171,27 @@ public class Main {
         return maxStreak;
     }
     
-    public static int daysAboveThreshold(String comm, int threshold) { 
-        return 1234; 
+    public static int daysAboveThreshold(String comm, int threshold) {
+        int commIndex=-1;
+        for (int i=0;i<COMMS;i++){
+            if (comm.equals(commodities[i])){
+                commIndex=i;
+            }
+        }
+        if(commIndex==-1){
+            return -1;
+        }
+        int dayCount=0;
+        for (int m=0;m<MONTHS;m++){
+            for (int d=0;d<DAYS;d++){
+                if (profitData[m][d][commIndex]>threshold){
+                    dayCount++;
+                }
+            }
+        }
+
+
+        return dayCount;
     }
 
     public static int biggestDailySwing(int month) { 
