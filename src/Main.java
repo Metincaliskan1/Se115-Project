@@ -256,8 +256,49 @@ public class Main {
         return result;
     }
     
-    public static String bestWeekOfMonth(int month) { 
-        return "DUMMY"; 
+    public static String bestWeekOfMonth(int month) {
+        if(month>11||month<0){
+            return "INVALID_MONTH";
+        }
+        int profitWeek1=0;
+        int profitWeek2=0;
+        int profitWeek3=0;
+        int profitWeek4=0;
+
+        for (int d=1;d<=7;d++){
+            profitWeek1=profitWeek1+totalProfitOnDay(month,d);
+        }
+        for (int d=8;d<=14;d++){
+            profitWeek2=profitWeek2+totalProfitOnDay(month,d);
+        }
+        for (int d=15;d<=21;d++){
+            profitWeek3=profitWeek3+totalProfitOnDay(month,d);
+        }
+        for (int d=22;d<=28;d++){
+            profitWeek4= profitWeek4+totalProfitOnDay(month,d);
+        }
+
+        int maxProfit = profitWeek1;
+        String result="Week 1";
+
+
+        if (profitWeek2 > maxProfit){
+            maxProfit=profitWeek2;
+            result="Week 2";
+
+        }
+        if (profitWeek3 > maxProfit){
+            maxProfit=profitWeek3;
+            result="Week 3";
+
+        }
+        if (profitWeek4 > maxProfit){
+            maxProfit=profitWeek4;
+            result="Week 4";
+
+        }
+
+        return result;
     }
 
     public static void main(String[] args) {
