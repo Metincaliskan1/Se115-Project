@@ -141,8 +141,34 @@ public class Main {
         return months[bestMonth];
     }
 
-    public static int consecutiveLossDays(String comm) { 
-        return 1234; 
+    public static int consecutiveLossDays(String comm) {
+        int commIndex=-1;
+        for (int i=0;i<COMMS;i++){
+            if (comm.equals(commodities[i])){
+                commIndex=i; //String olarak girilen commodatiesi int değerine çevirdik
+            }
+        }
+        if(commIndex==-1){
+            return -9999999;
+        }
+        int currentStreak=0;
+        int maxStreak=0;
+
+        for(int m=0;m<MONTHS;m++){
+            for (int d=0;d<DAYS;d++){
+                if(profitData[m][d][commIndex]<0){
+                    currentStreak++;
+                }
+                else {
+                    currentStreak=0;
+                }
+                if (currentStreak>maxStreak){
+                    maxStreak=currentStreak;
+                }
+            }
+        }
+
+        return maxStreak;
     }
     
     public static int daysAboveThreshold(String comm, int threshold) { 
@@ -165,4 +191,5 @@ public class Main {
         loadData();
         System.out.println("Data loaded – ready for queries");
     }
+
 }
