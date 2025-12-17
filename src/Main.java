@@ -194,8 +194,31 @@ public class Main {
         return dayCount;
     }
 
-    public static int biggestDailySwing(int month) { 
-        return 1234; 
+    public static int biggestDailySwing(int month) {
+        if(month>11||month<0){
+            return -99999;
+        }
+        int swing=0;
+        int maxSwing=0;
+
+
+        for (int d=2;d<=DAYS;d++){
+            //totalProfitOnDay metodu 1-28 arası o yüzden 2den başladım
+
+            int today=totalProfitOnDay(month,d);
+            int yesterday=totalProfitOnDay(month,d-1);
+
+            swing=today-yesterday;
+            if (swing < 0) {
+                swing = swing*-1;
+            }
+            if (swing>maxSwing){
+                maxSwing=swing;
+            }
+        }
+
+
+        return maxSwing;
     }
     
     public static String compareTwoCommodities(String c1, String c2) { 
