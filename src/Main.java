@@ -221,8 +221,39 @@ public class Main {
         return maxSwing;
     }
     
-    public static String compareTwoCommodities(String c1, String c2) { 
-        return "DUMMY is better by 1234"; 
+    public static String compareTwoCommodities(String c1, String c2) {
+        int comm1Index=-1;
+        int comm2Index=-1;
+        for (int i=0;i<COMMS;i++){
+            if (c1.equals(commodities[i])){
+                comm1Index=i; //String olarak girilen commodatiesi int değerine çevirdik
+            }
+            if (c2.equals(commodities[i])){
+                comm2Index=i;
+            }
+        }
+        if(comm1Index==-1||comm2Index==-1){
+            return "INVALID_COMMODITY";
+        }
+
+        int c1Profit = commodityProfitInRange(c1,1,28);
+        int c2Profit = commodityProfitInRange(c2,1,28);
+        int diff=0;
+
+
+        String result;
+
+        if (c1Profit>c2Profit){
+            diff=c1Profit-c2Profit;
+            result=c1+" is better by "+diff;
+        }else if (c1Profit==c2Profit){
+             result="Equal";
+        }else {
+            diff=c2Profit-c1Profit;
+            result=c2+" is better by "+diff;
+        }
+
+        return result;
     }
     
     public static String bestWeekOfMonth(int month) { 
