@@ -1,6 +1,7 @@
 // Main.java — Students version
 
 import java.io.*;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Main {
@@ -17,12 +18,33 @@ public class Main {
 
     // ======== REQUIRED METHOD LOAD DATA (Students fill this) ========
     public static void loadData() {
-        //temporary data
-        profitData[0][0][0] = 100;
-        profitData[0][0][1] = 200;
-        profitData[0][1][0] = 500;
 
-        System.out.println("Dummy data loaded for testing.");
+            for (int m = 0; m <MONTHS; m++){
+                try{
+                    Scanner reader = new Scanner(Paths.get("Data_Files/" +months[m]+".txt"));
+                    while (reader.hasNextLine()){
+                        String line= reader.nextLine();
+                        String[] parts=line.split(",");
+                        int day=Integer.parseInt(parts[0].trim());//trim boşluk varsa silmek için
+                        String CommName= parts[1].trim();
+                        int profit=Integer.parseInt(parts[2].trim());
+                        int commIndex = -1;
+                        for(int i=0;i<COMMS;i++){
+                            if(commodities[i].equals(CommName)){
+                                commIndex=i;
+                                break;
+                            }
+                        }
+                        if(commIndex != -1) {
+                            profitData[m][day-1][commIndex] = profit;
+                        }
+                    }
+                    reader.close();
+                } catch (IOException e) {
+                    System.out.println("Something went wrong....");
+
+            }
+     }
     }
 
     // ======== 10 REQUIRED METHODS (Students fill these) ========
